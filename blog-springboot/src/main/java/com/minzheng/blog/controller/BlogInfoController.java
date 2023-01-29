@@ -6,6 +6,7 @@ import com.minzheng.blog.dto.BlogBackInfoDTO;
 import com.minzheng.blog.dto.BlogHomeInfoDTO;
 import com.minzheng.blog.enums.FilePathEnum;
 import com.minzheng.blog.service.BlogInfoService;
+import com.minzheng.blog.service.BlogInfoService1;
 import com.minzheng.blog.service.impl.WebSocketServiceImpl;
 import com.minzheng.blog.strategy.context.UploadStrategyContext;
 import com.minzheng.blog.vo.BlogInfoVO;
@@ -35,6 +36,9 @@ import static com.minzheng.blog.constant.OptTypeConst.UPDATE;
 public class BlogInfoController {
     @Autowired
     private BlogInfoService blogInfoService;
+
+    @Autowired
+    private BlogInfoService1 blogInfoService1;
     @Autowired
     private WebSocketServiceImpl webSocketService;
     @Autowired
@@ -145,6 +149,7 @@ public class BlogInfoController {
     @PostMapping("/report")
     public Result<?> report() {
         blogInfoService.report();
+        blogInfoService1.report();
         return Result.ok();
     }
 

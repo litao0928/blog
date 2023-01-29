@@ -8,10 +8,7 @@ import com.minzheng.blog.dao.*;
 import com.minzheng.blog.dto.*;
 import com.minzheng.blog.entity.Article;
 import com.minzheng.blog.entity.WebsiteConfig;
-import com.minzheng.blog.service.BlogInfoService;
-import com.minzheng.blog.service.PageService;
-import com.minzheng.blog.service.RedisService;
-import com.minzheng.blog.service.UniqueViewService;
+import com.minzheng.blog.service.*;
 import com.minzheng.blog.util.BeanCopyUtils;
 import com.minzheng.blog.util.IpUtils;
 import com.minzheng.blog.vo.BlogInfoVO;
@@ -41,7 +38,7 @@ import static com.minzheng.blog.enums.ArticleStatusEnum.PUBLIC;
  * @since 2020-05-18
  */
 @Service
-public class BlogInfoServiceImpl implements BlogInfoService {
+public class BlogInfoServiceImpl1 implements BlogInfoService1 {
     @Autowired
     private UserInfoDao userInfoDao;
     @Autowired
@@ -174,31 +171,8 @@ public class BlogInfoServiceImpl implements BlogInfoService {
     @Override
     public void report() {
         // 获取ip
-        String ipAddress = IpUtils.getIpAddress(request);
-        // 获取访问设备
-        UserAgent userAgent = IpUtils.getUserAgent(request);
-        Browser browser = userAgent.getBrowser();
-        OperatingSystem operatingSystem = userAgent.getOperatingSystem();
-        // 生成唯一用户标识
-        String uuid = ipAddress + browser.getName() + operatingSystem.getName();
-        String md5 = DigestUtils.md5DigestAsHex(uuid.getBytes());
-        // 判断是否访问
-        if (!redisService.sIsMember(UNIQUE_VISITOR, md5)) {
-            // 统计游客地域分布
-            String ipSource = IpUtils.getIpSource(ipAddress);
-            if (StringUtils.isNotBlank(ipSource)) {
-                ipSource = ipSource.substring(0, 2)
-                        .replaceAll(PROVINCE, "")
-                        .replaceAll(CITY, "");
-                redisService.hIncr(VISITOR_AREA, ipSource, 1L);
-            } else {
-                redisService.hIncr(VISITOR_AREA, UNKNOWN, 1L);
-            }
-            // 访问量+1
-            redisService.incr(BLOG_VIEWS_COUNT, 1);
-            // 保存唯一标识
-            redisService.sAdd(UNIQUE_VISITOR, md5);
-        }
+        System.out.println("test report");
+
     }
 
     /**

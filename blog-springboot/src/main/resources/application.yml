@@ -1,6 +1,6 @@
 # 配置端口
 server:
-  port: 8080
+  port: 8090
   servlet:
     session:
       timeout: 21600
@@ -10,9 +10,9 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://你的ip:3306/blog?serverTimezone=Asia/Shanghai&allowMultiQueries=true
-    username: MYSQL用户名
-    password: MYSQL密码
+    url: jdbc:mysql://192.168.10.17:3307/blog?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+    username: root
+    password: f3V8i88MpIBFjy9S
     hikari:
       minimum-idle: 5
       # 空闲连接存活最大时间，默认600000（10分钟）
@@ -30,15 +30,15 @@ spring:
       connection-test-query: SELECT 1
   # redis配置
   redis:
-    host: 你的ip
+    host: 192.168.10.24
     port: 6379
-    password: Redis密码
+    password: tianta@123
   # mq配置
   rabbitmq:
-    host: 你的ip
+    host: 192.168.10.30
     port: 5672
-    username: rabbitmq用户名
-    password: rabbitmq密码
+    username: admin
+    password: 123456
     listener:
       simple:
         retry:
@@ -48,7 +48,7 @@ spring:
   # es配置 若搜索模式为mysql可删除
   elasticsearch:
     rest:
-      uris: 你的IP:9200
+      uris: 192.168.10.27:1936
   # 邮箱配置
   mail:
     host: smtp.qq.com

@@ -74,6 +74,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> impleme
     @Autowired
     private BlogInfoService blogInfoService;
     @Autowired
+    private BlogInfoService1 blogInfoService1;
+    @Autowired
     private UploadStrategyContext uploadStrategyContext;
 
     @Override
